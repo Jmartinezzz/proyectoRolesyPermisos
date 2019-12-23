@@ -4,30 +4,32 @@
 <div class="row mb-2 justify-content-between">
 	<div class="h2 w-100 mb-3">{{ trans('app.roles_list') }} <span class="icon-user-tie"></span></div>
 	<div class="col-4">
-		<button id="btnAddUser" class="btn btn-primary" data-toggle="modal" data-target="#modaAddUser">
+		@can('roles.create')
+			<button id="btnAddUser" class="btn btn-primary" data-toggle="modal" data-target="#modaAddUser">
 			{{ trans('app.new_role') }} <span class="icon-circle-with-plus"></span>
-		</button>
-		<!-- Modal -->
-		<div class="modal fade" id="modaAddUser" tabindex="-1" role="dialog" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">{{ trans('app.add_role') }}</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span class="icon-cancel-circle"></span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        ...
-		      </div>
-		      <div class="modal-footer bg-secondary text-light">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('app.btn_cancel') }} <span class="icon-cross2"></span></button>
-		        <button type="button" class="btn btn-primary">{{ trans('app.btn_save') }} <span class="icon-circle-with-plus"></span></button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-		<!-- Modal -->
+			</button>
+			<!-- Modal -->
+			<div class="modal fade" id="modaAddUser" tabindex="-1" role="dialog" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">{{ trans('app.add_role') }}</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span class="icon-cancel-circle"></span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        ...
+			      </div>
+			      <div class="modal-footer bg-secondary text-light">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('app.btn_cancel') }} <span class="icon-cross2"></span></button>
+			        <button type="button" class="btn btn-primary">{{ trans('app.btn_save') }} <span class="icon-circle-with-plus"></span></button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- Modal -->
+		@endcan
 	</div>
 	<div class="col-4">
 		<form action="roles" class="form-inline float-right" method="GET">
@@ -70,12 +72,16 @@
 					@endif
 				</td>
 				<td>
-					<button name="edit" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="{{ trans('app.edit') }}">
+					@can('roles.edit')
+						<button name="edit" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="{{ trans('app.edit') }}">
 						<span class="icon-pencil" ></span>
 					</button>
-					<button name="delete" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" title="{{ trans('app.delete') }}">
-						<span class="icon-trash"></span>
-					</button>					
+					@endcan
+					@can('roles.destroy')
+						<button name="delete" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" title="{{ trans('app.delete') }}">
+							<span class="icon-trash"></span>
+						</button>	
+					@endcan				
 				</td>
 			</tr>
 		@empty

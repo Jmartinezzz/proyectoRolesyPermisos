@@ -6,6 +6,8 @@ return [
 	'new_user' => 'New User',
 	'search' => 'Search',
 	'placeholder_search' => 'Type an email',
+	'role' => 'Role',
+	'without_role' => 'No role',
 	'user' => 'User',
 	'email' => 'Email',
 	'creation' => 'Created at',
@@ -13,8 +15,13 @@ return [
 	'edit' => 'Edit',
 	'delete' => 'Delete',
 	'add_user' => 'Add New User',
+	'user_stored' => 'User added successfully!',
+	'user_destroyed' => 'User :name deleted successfully!',
 	'btn_cancel' => 'Cancel',
 	'btn_save' => 'Save',
+	'btnElliminarConfirm' => 'Yes, delete it',
+	'btnEliminarText' => "You won't be able to revert this",
+	'btnEliminarTitle' => 'Are you sure?',
 	//pagina de usuarios
 
 	//pagina de roles

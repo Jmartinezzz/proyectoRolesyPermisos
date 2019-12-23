@@ -45,4 +45,9 @@ class User extends Authenticatable
             return $query->where('email','LIKE',"%$email%");
         }
     }
+
+     public function roles()
+    {
+        return $this->belongsToMany('Caffeinated\Shinobi\Models\Role');
+    }
 }

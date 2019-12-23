@@ -14,33 +14,30 @@ Route::get('/', 'AdminsController@index')->middleware('auth')->name('admin.index
 
 
 Route::group(['prefix' => 'users', 'middleware' => 'auth'], function(){
+
    Route::get('/', 'UsersController@index')->name('users.index')->middleware('can:users.index');
-;
- /*  Route::get('/cuenta/{id}', 'Auth\RegisterController@show')->name('cuenta');
-   Route::get('/nuevo', 'Auth\RegisterController@nuevo');
-   Route::get('/cambiar_contrasena', 'Auth\RegisterController@cambiarcontra')->name('cambiarcontra');
-   Route::post('/cambiar_contrasena', 'Auth\RegisterController@guardarcambiarcontra');
-   Route::post('/guardar', 'Auth\RegisterController@guardar')->name('guardar');
-   Route::post('/borrar/{prod}', 'Auth\RegisterController@borrar');
-   Route::get('/editar/{id}', 'Auth\RegisterController@editar');
-   Route::post('/modificar/{id}', 'Auth\RegisterController@modificar');*/
+   
+   Route::post('store', 'UsersController@store')->name('users.store')->middleware('can:users.create');
+
+   Route::delete('destroy/{user}', 'UsersController@destroy')->name('users.destroy')->middleware('can:users.destroy');
+ 
 });
 
 Route::group(['prefix' => 'roles', 'middleware' => 'auth'], function(){
 
 	Route::get('/', 'RolesController@index')->name('roles.index')->middleware('can:roles.index');
 
-	Route::get('{role}', 'RolesController@show')->name('roles.show');//->middleware('can:roles.show');
+	Route::get('{role}', 'RolesController@show')->name('roles.show')->middleware('can:roles.show');
 
-	Route::post('store', 'RolesController@store')->name('roles.store');//->middleware('can:roles.create');
+	Route::post('store', 'RolesController@store')->name('roles.store')->middleware('can:roles.create');
 
-	Route::get('create', 'RolesController@create')->name('roles.create');//->middleware('can:roles.create');
+	Route::get('create', 'RolesController@create')->name('roles.create')->middleware('can:roles.create');
 
-	Route::get('edit/{role}', 'RolesController@edit')->name('roles.edit');//->middleware('can:roles.edit');
+	Route::get('edit/{role}', 'RolesController@edit')->name('roles.edit')->middleware('can:roles.edit');
 
-	Route::put('edit/{role}', 'RolesController@update')->name('roles.update');//->middleware('can:roles.edit');
+	Route::put('edit/{role}', 'RolesController@update')->name('roles.update')->middleware('can:roles.edit');
 
-	Route::delete('{role}', 'RolesController@destroy')->name('roles.destroy');//->middleware('can:roles.destroy');
+	Route::delete('{role}', 'RolesController@destroy')->name('roles.destroy')->middleware('can:roles.destroy');
 
 });
 

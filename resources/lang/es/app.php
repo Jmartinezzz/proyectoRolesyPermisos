@@ -6,6 +6,8 @@ return [
 	'new_user' => 'Nuevo Usuario',
 	'search' => 'Buscar',
 	'placeholder_search' => 'Ingresa un email',
+	'role' => 'Rol',
+	'without_role' => 'Sin rol',
 	'user' => 'Usuario',
 	'email' => 'Correo',
 	'creation' => 'Creación',
@@ -13,8 +15,13 @@ return [
 	'edit' => 'Editar',
 	'delete' => 'Borrar',
 	'add_user' => 'Agregar Nuevo Usuario',
+	'user_stored' => '¡Usuario agregado con éxito!',
+	'user_destroyed' => '¡Usuario :name eliminado con éxito!',
 	'btn_cancel' => 'Cancelar',
 	'btn_save' => 'Guardar',
+	'btnElliminarConfirm' => 'Si, borrar',
+	'btnEliminarText' => 'No podrás revertir esto',
+	'btnEliminarTitle' => '¿Estas seguro?',
 	//pagina de usuarios
 
 	//pagina de roles

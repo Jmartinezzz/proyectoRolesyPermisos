@@ -13,4 +13,6 @@ class Role extends RoleShinobi
             return $query->where('name','LIKE',"%$name%");
         }
     }
+
+    
 }

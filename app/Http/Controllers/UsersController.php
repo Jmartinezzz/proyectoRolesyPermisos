@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\User;
+use App\Role;
 
 class UsersController extends Controller
 {
@@ -15,8 +17,10 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $email = $request->searchEmail;
-        $users = User::orderBy('id', 'DESC')->searchByEmail($email)->paginate(10);
-        return view('users.users', ['users' => $users]);
+        $users = User::orderBy('id', 'DESC')->searchByEmail($email)->with('roles')->paginate(10);
+        $roles = Role::pluck('name', 'id');
+       
+        return view('users.users', ['users' => $users, 'roles' => $roles]);
     }
 
     /**
@@ -35,9 +39,18 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = new User;
+        $user->user = $request->user;
+        $user->email = $request->email;
+        $user->password = bcrypt('secret');
+        $user->save();
+
+        if ($user->save()) {
+            return 1;
+            // return redirect()->route('users.index')->with('info', trans('app.user_stored'));
+        }
     }
 
     /**
@@ -80,8 +93,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(User $user)
+    {        
+        if ($user->delete()) {
+            return redirect()->route('users.index')->with('info', trans('app.user_destroyed', ['name' => $user->user]));
+        }
     }
 }
