@@ -5,7 +5,7 @@
 	<div class="h2 w-100 mb-3">{{ trans('app.user_list') }} <span class="icon-users2"></span></div>
 	@if (session('info'))
 		<div class="alert alert-info alert-dismissible fade show w-100" role="alert">
-		  <strong>¡Atención!</strong> {{ session('info') }}
+		  <strong>{{ trans('app.attention') }},</strong> {{ session('info') }}
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		    <span aria-hidden="true">&times;</span>
 		  </button>
@@ -13,11 +13,11 @@
 	@endif
 	<div class="col-4">
 		@can('users.create')
-			<button id="btnAddUser" class="btn btn-primary" data-toggle="modal" data-target="#modaAddUser">
+			<button id="btnAddUser" class="btn btn-primary" data-toggle="modal" data-target="#modalAddUser">
 			{{ trans('app.new_user') }} <span class="icon-circle-with-plus"></span>
 			</button>
 			<!-- Modal -->
-			<div class="modal fade" id="modaAddUser" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -27,7 +27,7 @@
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        {!! Form::open(['route' => 'users.store', 'method' => 'POST', 'id' => 'formAddUser']) !!}
+			        {!! Form::open(['route' => 'users.store', 'method' => 'put', 'id' => 'formEditUser']) !!}
 			        	@include('users.formUsers')
 			      </div>
 			      <div class="modal-footer bg-secondary text-light">
@@ -75,9 +75,9 @@
 				<td>{{ $user->created_at->format('M-d-Y, h:i:s A') }}</td>
 				<td>
 					@can('users.edit')
-						<button name="edit" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="{{ trans('app.edit') }}">
+						<a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="{{ trans('app.edit') }}">
 							<span class="icon-pencil" ></span>
-						</button>
+						</a>
 					@endcan
 					@can('users.destroy')
 						{{ Form::open(['route' => ['users.destroy',$user->id] ,'method' => 'delete', 'class' => 'd-inline']) }}
@@ -107,18 +107,14 @@
 @section('scriptsFooter')
 	<script>
 		$(function () {
-			$('[data-toggle="tooltip"]').tooltip();
-			$('#mensajes-error').hide();
+			$('[data-toggle="tooltip"]').tooltip();//activar tooltip bootstrap
+			
 
-			// mostrar errores de validacion en formulario de ingreso de usuarios
+			//agregar y mostrar errores de validacion en formulario de ingreso de usuarios
 			$('#btnStoreUser').on('click', function(){
-			  	var data = $('#formAddUser').serialize();
-			  	var user = $('#user').val();
-			  	var email = $('#email').val();
-			  	var role = $('#role').val();
+			  	var data = $('#formAddUser').serialize();			  
 			  	var token = $('input[name=_token]').val();
-			  	var route = "{{ route('users.store') }}"; 
-			  	// var data = {"user" : user, "email" : email, "role" : role };
+			  	var route = "{{ route('users.store') }}"; 			  	
 
 			  	$.ajax({
 			  		url: route,
@@ -126,9 +122,16 @@
 			  		type: 'POST',
 			  		dataType:"json",
 			  		data:data,
-			  		success:function(data){			  			
+			  		success:function(data){		
+			  			$('#modalAddUser').modal('hide');	  			
 		  				$("#formAddUser")[0].reset();
-		  				window.location.href = "{{  route('users.index', Session::put('info', trans('app.user_stored'))) }}";	  					  			
+		  				Swal.fire(
+						  '{{ trans('app.attention') }}',
+						  '{{ trans('app.user_stored') }}',
+						  'success'
+						);
+		  				location.href="{{  route('users.index') }}";
+
 			  		},
 			  		error:function(data){ 			  		
 			  			$('.close').on('click', function(){
@@ -149,7 +152,7 @@
 			  		},
 			  	})
 		  	});
-		   // mostrar errores de validacion en formulario de ingreso de usuarios
+		   //agregar y mostrar errores de validacion en formulario de ingreso de usuarios
 
 		   // eliminar registro
 		    $('.btn-eliminar').on('click', function(e){

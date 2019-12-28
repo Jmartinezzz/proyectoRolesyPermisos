@@ -2,10 +2,11 @@
 return [
 	//pagina de usuarios
 	'user_list' => 'User List',
+	'attention' => 'Attention!',
 	'if_no_exist_users' => "There aren't users records!",
 	'new_user' => 'New User',
 	'search' => 'Search',
-	'placeholder_search' => 'Type an email',
+	'placeholder_search' => 'Type an user or email',
 	'role' => 'Role',
 	'without_role' => 'No role',
 	'user' => 'User',
@@ -23,6 +24,13 @@ return [
 	'btnEliminarText' => "You won't be able to revert this",
 	'btnEliminarTitle' => 'Are you sure?',
 	//pagina de usuarios
+
+	//edicion de usuarios
+	'user_edit' => 'User Edition',
+	'btn_save_changes' => 'Save changes',
+	'user_updated' => 'User :name updated successfully!',
+	
+	//edicion de usuarios
 
 	//pagina de roles
 	'roles_list' => 'Roles List',

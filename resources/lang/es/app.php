@@ -2,10 +2,11 @@
 return [
 	//pagina de usuarios
 	'user_list' => 'Listado de Usuarios',
+	'attention' => '¡Atención!',
 	'if_no_exist_users' => '¡No Existen Registros de Usuarios!',
 	'new_user' => 'Nuevo Usuario',
 	'search' => 'Buscar',
-	'placeholder_search' => 'Ingresa un email',
+	'placeholder_search' => 'Ingresa un usuario o email',
 	'role' => 'Rol',
 	'without_role' => 'Sin rol',
 	'user' => 'Usuario',
@@ -23,6 +24,13 @@ return [
 	'btnEliminarText' => 'No podrás revertir esto',
 	'btnEliminarTitle' => '¿Estas seguro?',
 	//pagina de usuarios
+
+	//edicion de usuarios
+	'user_edit' => 'Edición de usuario',
+	'btn_save_changes' => 'Guardar cambios',
+	'user_updated' => '¡Usuario :name actualizado con éxito!',
+	
+	//edicion de usuarios
 
 	//pagina de roles
 	'roles_list' => 'Listado de Roles',

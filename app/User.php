@@ -39,10 +39,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function scopeSearchByEmail($query, $email)
+    public function scopeSearchByEmail($query, $argumento)
     {
-        if ($email) {
-            return $query->where('email','LIKE',"%$email%");
+        if ($argumento) {
+            return $query->where('email','LIKE',"%$argumento%")->orWhere('user','LIKE',"%$argumento%");
         }
     }
 

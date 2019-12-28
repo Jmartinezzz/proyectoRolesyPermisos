@@ -26,6 +26,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script>
 		$(function(){
+			$('#mensajes-error').hide();//esconder el div de errores del form de usuarios al iniciar
 			$('#linkSalir').on('click', function() {
 	        	$('#formSalir').submit();
 	        });

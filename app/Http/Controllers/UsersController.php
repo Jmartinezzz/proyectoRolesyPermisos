@@ -20,7 +20,7 @@ class UsersController extends Controller
         $users = User::orderBy('id', 'DESC')->searchByEmail($email)->with('roles')->paginate(10);
         $roles = Role::pluck('name', 'id');
        
-        return view('users.users', ['users' => $users, 'roles' => $roles]);
+        return view('users.users', ['users' => $users, 'roles' => $roles]));
     }
 
     /**
@@ -45,10 +45,11 @@ class UsersController extends Controller
         $user->user = $request->user;
         $user->email = $request->email;
         $user->password = bcrypt('secret');
-        $user->save();
 
         if ($user->save()) {
+
             return 1;
+
             // return redirect()->route('users.index')->with('info', trans('app.user_stored'));
         }
     }
@@ -70,9 +71,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::pluck('name', 'id');
+        return view('users.edit',['user' => $user, 'roles' => $roles]);
     }
 
     /**
@@ -82,9 +84,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        if ($user->update($request->all())) {
+            return redirect()->route('users.index')->with('info', trans('app.user_updated', ['name' => $user->user]));
+        }
+   
     }
 
     /**
