@@ -27,7 +27,7 @@
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        {!! Form::open(['route' => 'users.store', 'method' => 'put', 'id' => 'formEditUser']) !!}
+			        {!! Form::open(['route' => 'users.store', 'method' => 'post', 'id' => 'formAddUser']) !!}
 			        	@include('users.formUsers')
 			      </div>
 			      <div class="modal-footer bg-secondary text-light">

@@ -28,7 +28,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function(){
  
 });
 
-Route::group(['prefix' => 'roles', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'roles', 'middleware' => ['auth','web']], function(){
 
 	Route::get('/', 'RolesController@index')->name('roles.index')->middleware('can:roles.index');
 
@@ -48,3 +48,9 @@ Route::group(['prefix' => 'roles', 'middleware' => 'auth'], function(){
 
 Auth::routes();
 
+/*ruta para cambiar de idioma*/
+Route::get('lang/{lang}', function($lang) {
+  \Session::put('lang', $lang);
+  return \Redirect::back();
+})->middleware('web')->name('change_lang');
+/*ruta para cambiar de idioma*/

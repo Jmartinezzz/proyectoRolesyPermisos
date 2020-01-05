@@ -25,24 +25,31 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Another</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a id="linkSalir" class="dropdown-item" href="#">Salir</a>
+            <form id="formSalir" action="{{ url('logout') }}" method="POST">
+              @csrf
+            </form>
         </div>
       </li>
-     @auth
-      <li class="nav-item">
-        <a id="linkSalir" class="nav-link" href="#">Salir</a>
-        <form id="formSalir" action="{{ url('logout') }}" method="POST">
-          @csrf
-        </form>
-      </li>
-     @endauth
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <ul class="navbar-nav mr-4">
+    	<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarLocale" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ App::getLocale() }}
+        </a>
+         <div class="dropdown-menu" style="min-width: 5rem "  aria-labelledby="navbarLocale">
+            <a class="dropdown-item" href="{{ route('change_lang', ['lang' => 'es']) }}">es</a>
+            <a class="dropdown-item" href="{{ route('change_lang', ['lang' => 'en']) }}">en</a>
+         </div>
+      </li>
+    </ul>
   </div>
+  {{-- seccion de idioma alineado a la derecha --}}
+
+   {{-- seccion de idioma alineado a la derecha --}}
 </nav>
+
+
 

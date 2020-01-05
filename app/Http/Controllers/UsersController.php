@@ -20,7 +20,7 @@ class UsersController extends Controller
         $users = User::orderBy('id', 'DESC')->searchByEmail($email)->with('roles')->paginate(10);
         $roles = Role::pluck('name', 'id');
        
-        return view('users.users', ['users' => $users, 'roles' => $roles]));
+        return view('users.users', ['users' => $users, 'roles' => $roles]);
     }
 
     /**
