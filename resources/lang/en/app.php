@@ -19,10 +19,7 @@ return [
 	'user_stored' => 'User added successfully!',
 	'user_destroyed' => 'User :name deleted successfully!',
 	'btn_cancel' => 'Cancel',
-	'btn_save' => 'Save',
-	'btnElliminarConfirm' => 'Yes, delete it',
-	'btnEliminarText' => "You won't be able to revert this",
-	'btnEliminarTitle' => 'Are you sure?',
+	'btn_save' => 'Save',	
 	//pagina de usuarios
 
 	//edicion de usuarios
@@ -31,6 +28,12 @@ return [
 	'user_updated' => 'User :name updated successfully!',
 	
 	//edicion de usuarios
+
+	//formulario de usuarios
+	'user_name' => 'Username:',
+	'user_email' => 'E-mail:',
+	'user_role' => 'Role:',
+	//formulario de usuarios
 
 	//pagina de roles
 	'roles_list' => 'Roles List',
@@ -49,7 +52,21 @@ return [
 	'add_role' => 'Add Nuevo Role',
 	'btn_cancel' => 'Cancel',
 	'btn_save' => 'Save',
+	'role_stored' => 'Role added successfully!',
+	'role_destroyed' => 'Role :name deleted successfully!',
 	//pagina de roles
+
+	//formulario de roles
+	'role_name' => 'Role name:',
+	'role_slug' => 'Slug:',
+	'role_description' => 'Description:',
+	//formulario de roles
+
+	// eliminar registros
+	'btnElliminarConfirm' => 'Yes, delete it',
+	'btnEliminarText' => "You won´t be able to revert this",
+	'btnEliminarTitle' => 'Are you sure?',
+	// eliminar registros
 
 
 	//error 404

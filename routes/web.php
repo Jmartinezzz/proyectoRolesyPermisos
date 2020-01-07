@@ -22,7 +22,6 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function(){
    Route::delete('destroy/{user}', 'UsersController@destroy')->name('users.destroy')->middleware('can:users.destroy');
 
    Route::get('edit/{user}', 'UsersController@edit')->name('users.edit')->middleware('can:users.edit')->where('id', '[0-9]+');
-;
 
    Route::put('edit/{user}', 'UsersController@update')->name('users.update')->middleware('can:users.edit');
  

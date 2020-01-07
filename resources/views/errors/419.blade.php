@@ -7,7 +7,7 @@
 		</div>
 		<div class="col-12 text-center">
 			<h2>
-				Página expirada <a href="{{ route('index') }}"><small>Regresar</small></a>
+				Página expirada <a href=""><small>Regresar</small></a>
 			</h2>
 		</div>
 	</div>

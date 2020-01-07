@@ -19,10 +19,7 @@ return [
 	'user_stored' => '¡Usuario agregado con éxito!',
 	'user_destroyed' => '¡Usuario :name eliminado con éxito!',
 	'btn_cancel' => 'Cancelar',
-	'btn_save' => 'Guardar',
-	'btnElliminarConfirm' => 'Si, borrar',
-	'btnEliminarText' => 'No podrás revertir esto',
-	'btnEliminarTitle' => '¿Estas seguro?',
+	'btn_save' => 'Guardar',	
 	//pagina de usuarios
 
 	//edicion de usuarios
@@ -31,6 +28,12 @@ return [
 	'user_updated' => '¡Usuario :name actualizado con éxito!',
 	
 	//edicion de usuarios
+
+	//formulario de usuarios
+	'user_name' => 'Nombre de usuario:',
+	'user_email' => 'Nombre de usuario:',
+	'user_role' => 'Nombre de usuario:',
+	//formulario de usuarios
 
 	//pagina de roles
 	'roles_list' => 'Listado de Roles',
@@ -49,7 +52,21 @@ return [
 	'add_role' => 'Agregar Nuevo Rol',
 	'btn_cancel' => 'Cancelar',
 	'btn_save' => 'Guardar',
+	'role_stored' => '¡Rol agregado con éxito!',
+	'role_destroyed' => 'Rol :name eliminado con éxito!',
 	//pagina de roles
+
+	//formulario de roles
+	'role_name' => 'Nombre del rol:',
+	'role_slug' => 'Slug:',
+	'role_description' => 'Descripción:',
+	//formulario de roles
+
+	// eliminar regitros
+	'btnEliminarTitle' => '¿Estas seguro?',
+	'btnElliminarConfirm' => 'Si, borrar',
+	'btnEliminarText' => 'No podrás revertir esto',
+	// eliminar regitros
 
 	//error 404
 	'title' => 'Error 404',

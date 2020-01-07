@@ -7,14 +7,14 @@
 </div>
 {{-- si existen errores --}}
 <div class="form-group">
-	{{ Form::label('user','Nombre de usuario:') }}
+	{{ Form::label('user', trans('app.user_name')) }}
 	{{ Form::text('user', null, ['class' => 'form-control']) }}
 </div>
 <div class="form-group">
-	{{ Form::label('email','Email:') }}
+	{{ Form::label('email', trans('app.user_email')) }}
 	{{ Form::email('email', null, ['class' => 'form-control']) }}
 </div>
 <div class="form-group">
-	{{ Form::label('role','Rol del usuario:') }}
-	{{ Form::select('role',$roles, null, ['class' => 'form-control']) }}
+	{{ Form::label('role', trans('app.user_role')) }}
+	{{ Form::select('role',$roles, (isset($users))?null:$user->roles, ['class' => 'form-control']) }}
 </div> 

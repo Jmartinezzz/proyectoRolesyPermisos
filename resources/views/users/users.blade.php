@@ -65,7 +65,12 @@
 				<td>{{ $user->id }}</td>
 				<td>
 					@forelse($user->roles as $role)
-						<span class="badge badge-info">{{ $role->name }}</span>
+						
+						@if($role->name == 'Admin')
+							<span class="badge badge-info">{{ $role->name }}</span>					
+						@else
+							<span class="badge badge-dark">{{ $role->name }}</span>					
+						@endif
 					@empty
 					    {{ trans('app.without_role') }}
 					@endforelse
@@ -90,13 +95,13 @@
 			</tr>
 		@empty
 			<tr>
-				<td colspan="5" class="text-center">{{ trans('app.if_no_exist_users') }}</td>
+				<td colspan="6" class="text-center">{{ trans('app.if_no_exist_users') }}</td>
 			</tr>
 		@endforelse
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="5">
+			<td colspan="6">
 				<div class="row justify-content-center">
 					{{ $users->links() }}
 				</div>
@@ -154,7 +159,7 @@
 		  	});
 		   //agregar y mostrar errores de validacion en formulario de ingreso de usuarios
 
-		   // eliminar registro
+		   // eliminar usuario
 		    $('.btn-eliminar').on('click', function(e){
 		    	Swal.fire({
 				  title: '{{ trans('app.btnEliminarTitle') }}',
@@ -172,7 +177,7 @@
 				})		      
 		        	      
 		    })
-		   // eliminar registro
+		   // eliminar usuario
 		});
 	</script>
 @endsection

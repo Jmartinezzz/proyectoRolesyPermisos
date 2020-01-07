@@ -34,6 +34,7 @@
         </div>
       </li>
     </ul>
+    {{-- seccion de idioma alineado a la derecha --}}
     <ul class="navbar-nav mr-4">
     	<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarLocale" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -45,10 +46,8 @@
          </div>
       </li>
     </ul>
+    {{-- seccion de idioma alineado a la derecha --}}
   </div>
-  {{-- seccion de idioma alineado a la derecha --}}
-
-   {{-- seccion de idioma alineado a la derecha --}}
 </nav>
 
 

@@ -46,10 +46,8 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt('secret');
 
-        if ($user->save()) {
-
+        if ($user->save() && $user->roles()->sync($request->role)) {
             return 1;
-
             // return redirect()->route('users.index')->with('info', trans('app.user_stored'));
         }
     }
@@ -85,8 +83,8 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UserRequest $request, User $user)
-    {
-        if ($user->update($request->all())) {
+    {        
+        if ($user->update($request->all()) && $user->roles()->sync($request->role)) {
             return redirect()->route('users.index')->with('info', trans('app.user_updated', ['name' => $user->user]));
         }
    
