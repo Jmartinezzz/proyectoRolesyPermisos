@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\User;
 use App\Role;
 
@@ -101,5 +102,14 @@ class UsersController extends Controller
         if ($user->delete()) {
             return redirect()->route('users.index')->with('info', trans('app.user_destroyed', ['name' => $user->user]));
         }
+    }
+
+    //Funcion para exportar PDF 
+
+    public function exportPDF()
+    {
+        $users = User::all();
+        $pdf = PDF::loadView('pdf.users', ['users' => $users]);
+        return $pdf->download('users-list.pdf');
     }
 }

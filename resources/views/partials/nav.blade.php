@@ -8,17 +8,19 @@
     <ul class="navbar-nav mr-auto">
       @can('users.index')
          <li class="nav-item">
-           <a class="nav-link" href="{{ route('users.index') }}">Usuarios <span class="sr-only"></span></a>
+           <a class="nav-link @yield('activeUserLink')" href="{{ route('users.index') }}">Usuarios <span class="sr-only"></span></a>
          </li>
       @endcan
       @can('roles.index')
          <li class="nav-item">
-           <a class="nav-link" href="{{ route('roles.index') }}">Roles <span class="sr-only"></span></a>
+           <a class="nav-link @yield('activeRolesLink')" href="{{ route('roles.index') }}">Roles <span class="sr-only"></span></a>
          </li>
       @endcan
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
+      @can('permissions.index')
+         <li class="nav-item">
+           <a class="nav-link @yield('activePermissionsLink')" href="{{ route('permissions.index') }}">Permisos <span class="sr-only"></span></a>
+         </li>
+      @endcan
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{ Auth::user()->user }}

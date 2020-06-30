@@ -1,5 +1,6 @@
 @extends('principal')
 @section('title',trans('app.roles_list'))
+@section('activeRolesLink','active')
 @section('content')
 <div class="row mb-2 justify-content-between">
 	<div class="h2 w-100 mb-3">{{ trans('app.roles_list') }} <span class="icon-user-tie"></span></div>
@@ -83,9 +84,9 @@
 				</td>
 				<td>
 					@can('roles.edit')
-						<button name="edit" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="{{ trans('app.edit') }}">
+						<a href="{{ route('roles.edit', $role->id) }}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="{{ trans('app.edit') }}">
 						<span class="icon-pencil" ></span>
-					</button>
+						</a>
 					@endcan
 					@can('roles.destroy')
 						{{ Form::open(['route' => ['roles.destroy',$role->id] ,'method' => 'delete', 'class' => 'd-inline']) }}
@@ -116,6 +117,11 @@
 	<script>
 		$(function () {
 		  	$('[data-toggle="tooltip"]').tooltip();
+
+		  	$("#btnDesplegarLista").on('click', function(){
+				$( "#icono" ).toggleClass('icon-chevron-thin-up');
+
+			});
 
 			//agregar y mostrar errores de validacion en formulario de ingreso de roles
 			$('#btnStoreRole').on('click', function(){

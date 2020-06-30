@@ -58,9 +58,19 @@ return [
 
 	//formulario de roles
 	'role_name' => 'Role name:',
-	'role_slug' => 'Slug:',
+	'role_slug' => 'URL friendly (slug):',
 	'role_description' => 'Description:',
+	'special_role' => 'Special permission',
+	'role_all_access' => 'All access',
+	'role_no_access' => 'No access',
+	'permissions_list' => 'Permissions list',
+	'role_no_desc' => 'No description',
 	//formulario de roles
+
+	// edicion de roles 
+	'role_edit' => 'Role Edition',
+	'role_updated' => 'Role :name updated successfully!',
+	// edicion de roles
 
 	// eliminar registros
 	'btnElliminarConfirm' => 'Yes, delete it',

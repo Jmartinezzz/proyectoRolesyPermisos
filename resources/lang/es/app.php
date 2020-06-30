@@ -26,13 +26,12 @@ return [
 	'user_edit' => 'Edición de usuario',
 	'btn_save_changes' => 'Guardar cambios',
 	'user_updated' => '¡Usuario :name actualizado con éxito!',
-	
 	//edicion de usuarios
 
 	//formulario de usuarios
 	'user_name' => 'Nombre de usuario:',
-	'user_email' => 'Nombre de usuario:',
-	'user_role' => 'Nombre de usuario:',
+	'user_email' => 'Correo electrónico:',
+	'user_role' => 'Asigne un rol:',
 	//formulario de usuarios
 
 	//pagina de roles
@@ -58,9 +57,44 @@ return [
 
 	//formulario de roles
 	'role_name' => 'Nombre del rol:',
-	'role_slug' => 'Slug:',
+	'role_slug' => 'URL amigable (slug):',
 	'role_description' => 'Descripción:',
+	'special_role' => 'Permiso especial',
+	'role_all_access' => 'Acceso total',
+	'role_no_access' => 'Ningún acceso',
+	'permissions_list' => 'Lista de permisos',
+	'role_no_desc' => 'Sin descripción',
 	//formulario de roles
+
+	// edicion de roles 
+	'role_edit' => 'Edición de rol',
+	'role_updated' => '¡Rol :name actualizado correctamente!',
+	// edicion de roles
+
+	//pagina de permisos
+	'permissions_list' => 'Listado de Permisos',
+	'if_no_exist_permissions' => '¡No Existen Registros de Permisos!',
+	'new_permission' => 'Nuevo Permiso',
+	'search' => 'Buscar',
+	'placeholder_search_Permission' => 'Nombre del permiso',
+	'permission' => 'Permiso',
+	'slug' => 'Slug',
+	'user' => 'Usuario',
+	'add_permission' => 'Agregar Nuevo Permiso',
+	'permission_stored' => '¡Permiso agregado con éxito!',
+	'permission_destroyed' => 'Permiso :name eliminado con éxito!',
+	//pagina de permisos
+
+	//formulario de roles
+	'permission_name' => 'Nombre del permiso:',
+	'permission_slug' => 'URL amigable (slug):',
+	'permission_description' => 'Descripción:',
+	//formulario de roles
+
+	// edicion de roles 
+	'permission_edit' => 'Edición de permiso',
+	'permission_updated' => '¡Permiso :name actualizado correctamente!',
+	// edicion de roles
 
 	// eliminar regitros
 	'btnEliminarTitle' => '¿Estas seguro?',

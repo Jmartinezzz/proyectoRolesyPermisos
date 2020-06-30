@@ -75,5 +75,37 @@ class PermissionTableSeeder extends Seeder
         	'description' => 'Crear un rol nuevo en el sistema',
         ]);
         //permisos para modulo de roles
+
+        //permisos para modulo de permisos
+        Permission::Create([
+            'name' => 'Navegar permisos',
+            'slug' => 'permissions.index',
+            'description' => 'Lista y navega todos los permisos del sistema',
+        ]);
+
+        Permission::Create([
+            'name' => 'Ver detalle del permiso',
+            'slug' => 'permissions.show',
+            'description' => 'Ver en detalle cada permiso del sistema',
+        ]);
+
+        Permission::Create([
+            'name' => 'Editar permiso',
+            'slug' => 'permissions.edit',
+            'description' => 'Editar cualquier permiso del sistema',
+        ]);
+
+        Permission::Create([
+            'name' => 'Eliminar permiso',
+            'slug' => 'permissions.destroy',
+            'description' => 'Eliminar cualquier permiso del sistema',
+        ]);
+
+        Permission::Create([
+            'name' => 'Crear permiso',
+            'slug' => 'permissions.create',
+            'description' => 'Crear un permiso nuevo en el sistema',
+        ]);
+        //permisos para modulo de permisos
     }
 }

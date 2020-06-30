@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\RoleRequest;
 use App\Role;
+use Caffeinated\Shinobi\Models\Permission;
 
 class RolesController extends Controller
 {
@@ -15,9 +16,10 @@ class RolesController extends Controller
      */
     public function index(Request $request)
     {
-        $role = $request->searchRole;
+        $role = $request->searchRole;        
         $roles = Role::orderBy('id', 'DESC')->searchByRoleName($role)->paginate(8);
-        return view('roles.roles', ['roles' => $roles]);
+        $permissions = Permission::all();
+        return view('roles.roles', ['roles' => $roles, 'permissions' => $permissions]);
     }
 
     /**
@@ -42,7 +44,7 @@ class RolesController extends Controller
         $role->name = $request->name;
         $role->slug = $request->slug;
         $role->description = $request->description;
-        if ($role->save()) {
+        if ($role->save() && $role->permissions()->sync($request->permissions)) {
             return 1;
         }        
     }
@@ -64,9 +66,10 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        $permissions = Permission::all();
+        return view('roles.edit',['role' => $role, 'permissions' => $permissions]);
     }
 
     /**
@@ -76,9 +79,11 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, Role $role)
     {
-        //
+        if ($role->update($request->all()) && $role->permissions()->sync($request->permissions)) {
+            return redirect()->route('roles.index')->with('info', trans('app.role_updated', ['name' => $role->name]));
+        }
     }
 
     /**

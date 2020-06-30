@@ -24,6 +24,8 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function(){
    Route::get('edit/{user}', 'UsersController@edit')->name('users.edit')->middleware('can:users.edit')->where('id', '[0-9]+');
 
    Route::put('edit/{user}', 'UsersController@update')->name('users.update')->middleware('can:users.edit');
+   
+   Route::get('users-list-pdf', 'UsersController@exportPDF')->name('users.export'); //->middleware('can:users.edit');
  
 });
 
@@ -42,6 +44,24 @@ Route::group(['prefix' => 'roles', 'middleware' => ['auth','web']], function(){
 	Route::put('edit/{role}', 'RolesController@update')->name('roles.update')->middleware('can:roles.edit');
 
 	Route::delete('{role}', 'RolesController@destroy')->name('roles.destroy')->middleware('can:roles.destroy');
+
+});
+
+Route::group(['prefix' => 'permissions', 'middleware' => ['auth','web']], function(){
+
+   Route::get('/', 'PermissionsController@index')->name('permissions.index')->middleware('can:permissions.index');
+
+   Route::get('{permission}', 'PermissionsController@show')->name('permissions.show')->middleware('can:permissions.show');
+
+   Route::post('store', 'PermissionsController@store')->name('permissions.store')->middleware('can:permissions.create');
+
+   Route::get('create', 'PermissionsController@create')->name('permissions.create')->middleware('can:permissions.create');
+
+   Route::get('edit/{permission}', 'PermissionsController@edit')->name('permissions.edit')->middleware('can:permissions.edit');
+
+   Route::put('edit/{permission}', 'PermissionsController@update')->name('permissions.update')->middleware('can:permissions.edit');
+
+   Route::delete('{permission}', 'PermissionsController@destroy')->name('permissions.destroy')->middleware('can:permissions.destroy');
 
 });
 

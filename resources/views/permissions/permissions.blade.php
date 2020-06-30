@@ -1,9 +1,9 @@
 @extends('principal')
-@section('title',trans('app.user_list'))
-@section('activeUserLink','active')
+@section('title',trans('app.permissions_list'))
+@section('activePermissionsLink','active')
 @section('content')
 <div class="row mb-2 justify-content-between">
-	<div class="h2 w-100 mb-3">{{ trans('app.user_list') }} <span class="icon-users2"></span></div>
+	<div class="h2 w-100 mb-3">{{ trans('app.permissions_list') }} <span class="icon-publish"></span></div>
 	@if (session('info')){{-- mostramos mensajes de la variable info --}}
 		<div class="alert alert-info alert-dismissible fade show w-100" role="alert">
 		  <strong>{{ trans('app.attention') }},</strong> {{ session('info') }}
@@ -13,27 +13,27 @@
 		</div>
 	@endif
 	<div class="col-4">
-		{{-- mostramos el boton que despliega la ventana modal para agregar un nuevo usuario --}}
-		@can('users.create')
-			<button id="btnAddUser" class="btn btn-primary" data-toggle="modal" data-target="#modalAddUser">
-			{{ trans('app.new_user') }} <span class="icon-circle-with-plus"></span>
+		{{-- mostramos el boton que despliega la ventana modal para agregar un nuevo permiso --}}
+		@can('permissions.create')
+			<button id="btnAddUser" class="btn btn-primary" data-toggle="modal" data-target="#modalAddPermission">
+			{{ trans('app.new_permission') }} <span class="icon-circle-with-plus"></span>
 			</button>
 			<!-- Modal -->
-			<div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal fade" id="modalAddPermission" tabindex="-1" role="dialog" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">{{ trans('app.add_user') }}</h5>
+			      <div class="modal-header" style="background: beige">
+			        <h5 class="modal-title" id="exampleModalLabel">{{ trans('app.add_permission') }}</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span class="icon-cancel-circle"></span>
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        {!! Form::open(['route' => 'users.store', 'method' => 'post', 'id' => 'formAddUser']) !!}
-			        	@include('users.formUsers')
+			        {!! Form::open(['route' => 'permissions.store', 'method' => 'post', 'id' => 'formAddPermissions']) !!}
+			        	@include('permissions.formPermissions')
 			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('app.btn_cancel') }} <span class="icon-cross2"></span></button>
+			      <div class="modal-footer" style="background: beige">
+			        <button type="button" class="btn btn-secondary border-dark" data-dismiss="modal">{{ trans('app.btn_cancel') }} <span class="icon-cross2"></span></button>
 			        <button id="btnStoreUser" type="button" class="btn btn-primary">{{ trans('app.btn_save') }} <span class="icon-circle-with-plus"></span></button>
 			        {!! Form::close() !!}
 			      </div>
@@ -42,13 +42,10 @@
 			</div>
 			<!-- Modal -->
 		@endcan
-		<a href="{{ route('users.export') }}" class="btn btn-outline-primary" data-toggle="tooltip" title="Exportar PDF">
-			<span class="icon-file-pdf"></span>
-		</a>
 	</div>
 	<div class="col-4">
-		<form action="users" class="form-inline float-right" method="GET">
-      		<input name="searchEmail" class="form-control mr-sm-2" type="search" placeholder="{{ trans('app.placeholder_search') }}" aria-label="Search">
+		<form action="permissions" class="form-inline float-right" method="GET">
+      		<input name="searchPermission" class="form-control mr-sm-2" type="search" placeholder="{{ trans('app.placeholder_search_Permission') }}" aria-label="Search">
       		<button class="btn btn-primary my-2 my-sm-0" type="submit">{{ trans('app.search') }} <span class="icon-search"></span></button>
     	</form>
 	</div>
@@ -57,40 +54,29 @@
 	<thead>
 		<tr>
 			<th>#</th>
-			<th>{{ trans('app.role') }}</th>
-			<th>{{ trans('app.user') }}</th>
-			<th>{{ trans('app.email') }}</th>
+			<th>{{ trans('app.permission') }}</th>
+			<th>{{ trans('app.slug') }}</th>
+			<th>{{ trans('app.description') }}</th>
 			<th>{{ trans('app.creation') }}</th>
 			<th>{{ trans('app.actions') }}</th>
 		</tr>
 	</thead>
 	<tbody>
-		@forelse($users as $user)
+		@forelse($permissions as $permission)
 			<tr>
-				<td>{{ $user->id }}</td>
+				<td>{{ $permission->id }}</td>
+				<td>{{ $permission->name }}</td>
+				<td>{{ $permission->slug }}</td>
+				<td>{{ $permission->description }}</td>
+				<td>{{ $permission->created_at->format('M-d-Y, h:i:s A') }}</td>
 				<td>
-					@forelse($user->roles as $role)
-						
-						@if($role->name == 'Admin')
-							<span class="badge badge-info">{{ $role->name }}</span>					
-						@else
-							<span class="badge badge-dark">{{ $role->name }}</span>					
-						@endif
-					@empty
-					    {{ trans('app.without_role') }}
-					@endforelse
-				</td>
-				<td>{{ $user->user }}</td>
-				<td>{{ $user->email }}</td>
-				<td>{{ $user->created_at->format('M-d-Y, h:i:s A') }}</td>
-				<td>
-					@can('users.edit')
-						<a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="{{ trans('app.edit') }}">
+					@can('permissions.edit')
+						<a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" title="{{ trans('app.edit') }}">
 							<span class="icon-pencil" ></span>
 						</a>
 					@endcan
-					@can('users.destroy')
-						{{ Form::open(['route' => ['users.destroy',$user->id] ,'method' => 'delete', 'class' => 'd-inline']) }}
+					@can('permissions.destroy')
+						{{ Form::open(['route' => ['permissions.destroy',$permission->id] ,'method' => 'delete', 'class' => 'd-inline']) }}
 						<button type="button" class="btn btn-outline-primary btn-sm btn-eliminar" data-toggle="tooltip" title="{{ trans('app.delete') }}">
 							<span class="icon-trash"></span>
 						</button>
@@ -100,7 +86,7 @@
 			</tr>
 		@empty
 			<tr>
-				<td colspan="6" class="text-center">{{ trans('app.if_no_exist_users') }}</td>
+				<td colspan="6" class="text-center">{{ trans('app.if_no_exist_permissions') }}</td>
 			</tr>
 		@endforelse
 	</tbody>
@@ -108,7 +94,7 @@
 		<tr>
 			<td colspan="6">
 				<div class="row justify-content-center">
-					{{ $users->links() }}
+					{{ $permissions->links() }}
 				</div>
 			</td>
 		</tr>
@@ -122,9 +108,9 @@
 
 			//agregar y mostrar errores de validacion en formulario de ingreso de usuarios
 			$('#btnStoreUser').on('click', function(){
-			  	var data = $('#formAddUser').serialize();			  
+			  	var data = $('#formAddPermissions').serialize();			  
 			  	var token = $('input[name=_token]').val();
-			  	var route = "{{ route('users.store') }}"; 			  	
+			  	var route = "{{ route('permissions.store') }}"; 			  	
 
 			  	$.ajax({
 			  		url: route,
@@ -133,14 +119,14 @@
 			  		dataType:"json",
 			  		data:data,
 			  		success:function(data){		
-			  			$('#modalAddUser').modal('hide');	  			
-		  				$("#formAddUser")[0].reset();
+			  			$('#modalAddPermission').modal('hide');	  			
+		  				$("#formAddPermissions")[0].reset();
 		  				Swal.fire(
 						  '{{ trans('app.attention') }}',
-						  '{{ trans('app.user_stored') }}',
+						  '{{ trans('app.permission_stored') }}',
 						  'success'
 						);
-		  				location.href="{{  route('users.index') }}";
+		  				location.href="{{  route('permissions.index') }}";
 
 			  		},
 			  		error:function(data){ 			  		

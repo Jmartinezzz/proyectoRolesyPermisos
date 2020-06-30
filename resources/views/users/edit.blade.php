@@ -1,5 +1,6 @@
 @extends('principal')
 @section('title',trans('app.user_edit'))
+@section('activeUserLink','active')
 @section('content')
 <div class="row mb-2">
 	<div class="h2 w-100 mb-3">{{ trans('app.user_edit') }} <span class="icon-edit"></span></div>

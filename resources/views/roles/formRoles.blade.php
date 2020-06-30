@@ -18,3 +18,27 @@
 	{{ Form::label('description', trans('app.role_description')) }}
 	{{ Form::textarea('description', null, ['class' => 'form-control', 'rows' => '2']) }}
 </div>
+<h4>{{ trans('app.special_role') }}</h4>
+<div class="form-group">
+	<label>{{ Form::radio('special', 'all-access') }} {{ trans('app.role_all_access') }}</label>	
+	<label>{{ Form::radio('special', 'no-access') }} {{ trans('app.role_no_access') }} </label>	
+</div>
+<hr>
+<h4>
+	{{ trans('app.permissions_list') }}
+	<a id="btnDesplegarLista" class=" btn-sm" data-toggle="collapse" href="#listadoRoles" aria-controls="listadoRoles" role="button">
+		<span id="icono" class="icon-chevron-thin-down"></span>
+	</a>
+</h4>
+<div class="form-group">
+	<ul class="list-unstyled" id="listadoRoles">
+		@foreach ($permissions as $permission)
+			<li>
+				<label>
+					{{ Form::checkbox('permissions[]', $permission->id, null) }} {{ $permission->name }}
+					<em class="text-muted">({{ $permission->description ?: trans('app.role_no_desc') }})</em>
+				</label>
+			</li>
+		@endforeach
+	</ul>
+</div>
